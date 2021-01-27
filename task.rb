@@ -18,7 +18,7 @@ def q2
   array.push(array1,array2)
   p array.flatten
 
-  ##パターン2
+  ##パターン2(配列の場合は、こちらが好ましい)
   p array = array1 +  array2
 end
 
@@ -59,7 +59,10 @@ def q7
   array = ["1", "2", "3", "4", "5"]
 
   # 以下に回答を記載
-  array.map!{|a| a.to_i }
+  # array.map!{|a| a.to_i }
+
+  # 上記を「&とシンボル」を使って簡潔に。
+    array.map!(&:to_i)
   # 以下は変更しないで下さい
   p array
 end
@@ -67,10 +70,14 @@ end
 def q8
   programming_languages = %w(ruby php python javascript)
 
-  # 以下に回答を記載
-   programming_languages.map!{|programming_language|
-    programming_language.capitalize
-  }
+  以下に回答を記載
+  #  programming_languages.map!{|programming_language|
+  #   programming_language.capitalize
+  # }
+
+  ##上記を「&とシンボル」を使って簡潔に。
+  programming_languages.map!(&:capitalize)
+
 
   upper_case_programming_languages = programming_languages.map{|programming_language|
     programming_language.upcase
@@ -108,14 +115,18 @@ def q11
   sports = ["サッカー", "バスケ", "野球", ["フットサル", "野球"], "水泳", "ハンドボール", ["卓球", "サッカー", "ボルダリング"]]
 
   # 以下に回答を記載
-
+  sports.flatten!
+  sports.uniq!
+  sports.each.with_index(1){|sport,i|
+    puts "No#{i} #{sport}"
+  }
 end
 
 def q12
   data = { user: { name: "satou", age: 33 } }
 
   # 以下に回答を記載
-
+  p data[:user][:name]
 end
 
 def q13
@@ -123,21 +134,36 @@ def q13
   update_data = { age: 32, address: "沖縄" }
 
   # 以下に回答を記載
-
+  user_data.delete(:name)
+  user_data[:age] = update_data[:age]
+  user_data[:address] = update_data[:address]
+  p user_data
 end
 
 def q14
   data = { name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com" }
 
   # 以下に回答を記載
-
+  p data.keys
 end
+
 
 def q15
   data1 = { name: "saitou", hobby: "soccer", age: 33, role: "admin" }
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
+  if data1.include?(:age)
+    puts "OK"
+  else
+    puts "NG"
+  end
+
+  if data2.include?(:age)
+    puts "OK"
+  else
+    puts "NG"
+  end
 
 end
 
@@ -150,7 +176,9 @@ def q16
   ]
 
   # 以下に回答を記載
-
+  users.each do |key_value|
+    puts "私の名前は#{key_value[:name]}です。年齢は#{key_value[:age]}歳です。"
+  end
 end
 
 class UserQ17
