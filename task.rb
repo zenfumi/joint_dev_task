@@ -188,10 +188,6 @@ end
 
 class UserQ17
   # 以下に回答を記載
-  attr_accessor :name
-  attr_accessor :age
-  attr_accessor :gender
-
   def initialize(name,age,gender)
     @name = name
     @age = age
@@ -220,9 +216,6 @@ end
 
 class UserQ18
   # 以下に回答を記載
-  attr_accessor :name
-  attr_accessor :age
-
   def initialize(name,age)
     @name = name
     @age = age
@@ -262,24 +255,45 @@ end
 
 class UserQ20
   # 以下に回答を記載
+  attr_accessor :name
+  attr_accessor :age
 
+  def initialize(name,age)
+    @name = name
+    @age = age
+  end
 end
 
 class Zoo
+  def initialize(infant,children,adult,senior)
+    @infant = infant
+    @children = children
+    @adult = adult
+    @senior = senior
+  end
   # 以下に回答を記載
-
+  def info_entry_fee(user)
+    if user.age < 6
+      puts "#{user.name}さんの入場料金は #{@infant}円です。"
+    elsif user.age < 12
+      puts "#{user.name}さんの入場料金は #{@children}円です。"
+    elsif user.age < 65
+      puts "#{user.name}さんの入場料金は #{@adult}円です。"
+    elsif user.age < 120
+      puts "#{user.name}さんの入場料金は #{@senior}円です。"
+    end
+  end
 end
-
 
 def q20
   # ここは変更しないで下さい（動物園・ユーザー情報は変更していただいてOKです）
-  zoo = Zoo.new(name: "旭山動物園", entry_fee: { infant: 0, children: 400, adult: 800, senior: 500 })
+  zoo = Zoo.new(0, 400, 800, 500)
 
   users = [
-    UserQ20.new(name: "たま", age: 3),
-    UserQ20.new(name: "ゆたぼん", age: 10),
-    UserQ20.new(name: "あじー", age: 32),
-    UserQ20.new(name: "ぎん", age: 108)
+    UserQ20.new("たま", 3),
+    UserQ20.new("ゆたぼん", 10),
+    UserQ20.new("あじー", 32),
+    UserQ20.new("ぎん", 108)
   ]
 
   users.each do |user|
