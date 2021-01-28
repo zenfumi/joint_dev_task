@@ -135,10 +135,7 @@ def q13
 
   # 以下に回答を記載
   user_data.delete(:name)
-  # user_data[:age] = update_data[:age]
-  user_data.store(:age,update_data[:age])
-  user_data.store(:address,update_data[:address])
-  p user_data
+  p user_data.merge!(update_data)
 end
 
 def q14
@@ -154,7 +151,7 @@ def q15
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
-  ##以下を三項演算子を用いて修正
+  三項演算子を用いないコード
   if data1.include?(:age)
     puts "OK"
   else
@@ -166,9 +163,9 @@ def q15
   else
     puts "NG"
   end
-  #以下だとエラー
-  # data1.include?(:age) puts "OK" : puts "NG"
-  # data2.include?(:age) puts "OK" : puts "NG"
+  #以下、三項演算子を用いて修正
+  p data1.include?(:age) ? "OK" :  "NG"
+  p data2.include?(:age) ? "OK" :  "NG"
 
 end
 
@@ -181,8 +178,8 @@ def q16
   ]
 
   # 以下に回答を記載
-  users.each do |hash|
-    puts "私の名前は#{hash[:name]}です。年齢は#{hash[:age]}歳です。"
+  users.each do |user|
+    puts "私の名前は#{user[:name]}です。年齢は#{user[:age]}歳です。"
   end
 end
 
