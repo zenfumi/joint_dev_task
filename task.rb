@@ -198,20 +198,20 @@ class UserQ17
     @gender = gender
   end
 
-  ##クラスの定義内であればインスタンス変数は使える。(外部で使用する為には、上のatter_accessorが必要)
+  ##クラスの定義内であればインスタンス変数は使える。(外部で使用する為には、上のattr_accessorが必要)
   def info
     puts <<~TEXT
-    "名前:#{@name}"
-    "年齢:#{@age}"
-    "性別:#{@gender}"
+    名前:#{@name}
+    年齢:#{@age}
+    性別:#{@gender}
     TEXT
   end
 end
 
 def q17
   # ここは変更しないで下さい（ユーザー情報は変更していただいてOKです）
-  user1 = UserQ17.new("神里",32, "男")
-  user2 = UserQ17.new("あじー",32, "男")
+  user1 = UserQ17.new("神里", 32, "男")
+  user2 = UserQ17.new("あじー", 32, "男")
 
   user1.info
   puts "-------------"
