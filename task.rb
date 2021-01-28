@@ -92,8 +92,8 @@ def q9
   names = ["田中", "佐藤", "佐々木", "高橋"]
 
   # 以下に回答を記載
-  names.each.with_index(1) do |name, i|
-    puts "会員No.#{i} #{name}さん"
+  names.each.with_index(1) do |name, number|
+    puts "会員No.#{number} #{name}さん"
   end
 end
 
@@ -115,10 +115,10 @@ def q11
   sports = ["サッカー", "バスケ", "野球", ["フットサル", "野球"], "水泳", "ハンドボール", ["卓球", "サッカー", "ボルダリング"]]
 
   # 以下に回答を記載
-  sports.flatten!
-  sports.uniq!
-  sports.each.with_index(1){|sport,i|
-    puts "No#{i} #{sport}"
+  ##メソッドチェーンを利用
+  sports.flatten!.uniq!
+  sports.each.with_index(1){|sport,number|
+    puts "No#{number} #{sport}"
   }
 end
 
@@ -135,8 +135,9 @@ def q13
 
   # 以下に回答を記載
   user_data.delete(:name)
-  user_data[:age] = update_data[:age]
-  user_data[:address] = update_data[:address]
+  # user_data[:age] = update_data[:age]
+  user_data.store(:age,update_data[:age])
+  user_data.store(:address,update_data[:address])
   p user_data
 end
 
@@ -153,10 +154,11 @@ def q15
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
+  ##以下を三項演算子を用いて修正
   if data1.include?(:age)
     puts "OK"
   else
-    puts "NG"
+    puts "OK"
   end
 
   if data2.include?(:age)
@@ -164,6 +166,9 @@ def q15
   else
     puts "NG"
   end
+  #以下だとエラー
+  # data1.include?(:age) puts "OK" : puts "NG"
+  # data2.include?(:age) puts "OK" : puts "NG"
 
 end
 
@@ -176,20 +181,37 @@ def q16
   ]
 
   # 以下に回答を記載
-  users.each do |key_value|
-    puts "私の名前は#{key_value[:name]}です。年齢は#{key_value[:age]}歳です。"
+  users.each do |hash|
+    puts "私の名前は#{hash[:name]}です。年齢は#{hash[:age]}歳です。"
   end
 end
 
 class UserQ17
   # 以下に回答を記載
+  attr_accessor :name
+  attr_accessor :age
+  attr_accessor :gender
 
+  def initialize(name,age,gender)
+    @name = name
+    @age = age
+    @gender = gender
+  end
+
+  ##クラスの定義内であればインスタンス変数は使える。(外部で使用する為には、上のatter_accessorが必要)
+  def info
+    puts <<~TEXT
+    "名前:#{@name}"
+    "年齢:#{@age}"
+    "性別:#{@gender}"
+    TEXT
+  end
 end
 
 def q17
   # ここは変更しないで下さい（ユーザー情報は変更していただいてOKです）
-  user1 = UserQ17.new(name: "神里", age: 32, gender: "男")
-  user2 = UserQ17.new(name: "あじー", age: 32, gender: "男")
+  user1 = UserQ17.new("神里",32, "男")
+  user2 = UserQ17.new("あじー",32, "男")
 
   user1.info
   puts "-------------"
@@ -198,13 +220,27 @@ end
 
 class UserQ18
   # 以下に回答を記載
+  attr_accessor :name
+  attr_accessor :age
 
+  def initialize(name,age)
+    @name = name
+    @age = age
+  end
+
+  def introduce
+    if @age > 20
+      puts "こんにちは，#{@name}と申します。宜しくお願いいたします。"
+    else
+      puts "はいさいまいど〜，#{@name}です！！！"
+    end
+  end
 end
 
 def q18
   # ここは変更しないで下さい
-  user1 = UserQ18.new(name: "あじー", age: 32)
-  user2 = UserQ18.new(name: "ゆたぼん", age: 10)
+  user1 = UserQ18.new("あじー", 32)
+  user2 = UserQ18.new("ゆたぼん", 10)
 
   puts user1.introduce
   puts user2.introduce
@@ -212,7 +248,7 @@ end
 
 class Item
   # 以下を修正して下さい
-
+  attr_accessor :name
   def initialize(name)
     @name = name
   end
@@ -220,7 +256,7 @@ end
 
 def q19
   # ここは変更しないで下さい
-  book = Item.new(name: "ゼロ秒思考")
+  book = Item.new("ゼロ秒思考")
   puts book.name
 end
 
