@@ -263,7 +263,7 @@ end
 
 class Zoo
 
-  def initialize(name:, entry_fee: {})
+  def initialize(name:, entry_fee:)
     @name = name
     @infant = entry_fee[:children]
     @children = entry_fee[:children]
