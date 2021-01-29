@@ -185,7 +185,7 @@ end
 
 class UserQ17
   # 以下に回答を記載
-  def initialize(name,age,gender)
+  def initialize(name:,age:,gender:)
     @name = name
     @age = age
     @gender = gender
@@ -203,8 +203,8 @@ end
 
 def q17
   # ここは変更しないで下さい（ユーザー情報は変更していただいてOKです）
-  user1 = UserQ17.new("神里", 32, "男")
-  user2 = UserQ17.new("あじー", 32, "男")
+  user1 = UserQ17.new(name: "神里", age: 32, gender: "男")
+  user2 = UserQ17.new(name: "あじー", age: 32, gender: "男")
 
   user1.info
   puts "-------------"
@@ -213,7 +213,7 @@ end
 
 class UserQ18
   # 以下に回答を記載
-  def initialize(name,age)
+  def initialize(name:,age:)
     @name = name
     @age = age
   end
@@ -229,8 +229,8 @@ end
 
 def q18
   # ここは変更しないで下さい
-  user1 = UserQ18.new("あじー", 32)
-  user2 = UserQ18.new("ゆたぼん", 10)
+  user1 = UserQ18.new(name: "あじー", age: 32)
+  user2 = UserQ18.new(name: "ゆたぼん", age: 10)
 
   puts user1.introduce
   puts user2.introduce
@@ -239,14 +239,14 @@ end
 class Item
   # 以下を修正して下さい
   attr_accessor :name
-  def initialize(name)
+  def initialize(name:)
     @name = name
   end
 end
 
 def q19
   # ここは変更しないで下さい
-  book = Item.new("ゼロ秒思考")
+  book = Item.new(name: "ゼロ秒思考")
   puts book.name
 end
 
@@ -255,19 +255,22 @@ class UserQ20
   attr_accessor :name
   attr_accessor :age
 
-  def initialize(name,age)
+  def initialize(name:,age:)
     @name = name
     @age = age
   end
 end
 
 class Zoo
-  def initialize(infant,children,adult,senior)
-    @infant = infant
-    @children = children
-    @adult = adult
-    @senior = senior
+
+  def initialize(name:, entry_fee: {})
+    @name = name
+    @infant = entry_fee[:children]
+    @children = entry_fee[:children]
+    @adult = entry_fee[:adult]
+    @senior = entry_fee[:senior]
   end
+
   # 以下に回答を記載
   def info_entry_fee(user)
     if user.age < 6
@@ -284,13 +287,12 @@ end
 
 def q20
   # ここは変更しないで下さい（動物園・ユーザー情報は変更していただいてOKです）
-  zoo = Zoo.new(0, 400, 800, 500)
-
+  zoo = Zoo.new(name: "旭山動物園", entry_fee: { infant: 0, children: 400, adult: 800, senior: 500 })
   users = [
-    UserQ20.new("たま", 3),
-    UserQ20.new("ゆたぼん", 10),
-    UserQ20.new("あじー", 32),
-    UserQ20.new("ぎん", 108)
+    UserQ20.new(name: "たま", age: 3),
+    UserQ20.new(name: "ゆたぼん", age: 10),
+    UserQ20.new(name: "あじー", age: 32),
+    UserQ20.new(name: "ぎん", age: 108)
   ]
 
   users.each do |user|
